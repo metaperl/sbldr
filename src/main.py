@@ -132,6 +132,30 @@ class Entry(object):
 
         elem.click()
 
+    def trade(self):
+        print("Trading...")
+
+        self.browser.visit(url_for_action('trade'))
+
+
+
+        self.browser.find_by_name('ctl00$ctl00$MainContent$MainContent$ucView$c$views$c$RttOrderEntry$txtSymbol').type(self.symbol + '\t')
+
+        loop_forever()
+
+
+        #self.browser.find_by_name('widget_signInPassword').type(self._password)
+
+        elem = self.browser.find_by_xpath(
+            '//span[text()="Sign In"]'
+        )
+
+        elem = elem[1]
+
+        print("Found elem {}".format(elem))
+
+        elem.click()
+
     def view_ads(self):
         for i in xrange(1,11):
             print("Viewing ad {0}".format(i))
@@ -254,8 +278,9 @@ def main(spend, profit, symbol):
         e = Entry(browser, spend, profit, symbol)
 
         e.login()
+        e.trade()
 
-        loop_forever()
+
 
 if __name__ == '__main__':
     main()
